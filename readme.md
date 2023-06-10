@@ -1,3 +1,9 @@
+# Web Client Boilerplate
+
+This repo can be used to start building web client applications.
+
+
+- [ ] Update Readme
 - [x] render function
 - [x] typescript support
 - [x] build chain with Vite
