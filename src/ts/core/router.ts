@@ -1,4 +1,4 @@
-import Navigo from 'navigo'
+import Navigo, { type Match } from 'navigo'
 import { type PlainNode, renderInto } from './render.ts'
 
 export let activeLayout: PlainNode
@@ -9,6 +9,12 @@ export const router = new Navigo('/')
 export interface RouteConfig {
   layout: PlainNode
   page: PlainNode
+}
+
+export function currentRoute (): Match | undefined {
+  const results = router.lastResolved()
+  if (results === null || results.length === 0) return undefined
+  return results[0]
 }
 
 export function applyRouting (routes: Record<string, RouteConfig>): void {
