@@ -1,4 +1,4 @@
 export default {
-    class: "page",
-    text: "Login"
-};
+  class: 'page',
+  text: 'Login'
+}

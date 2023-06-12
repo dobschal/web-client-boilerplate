@@ -15,3 +15,4 @@ This repo can be used to start building web client applications.
 - [ ] Jest unit tests, especially for the core
 - [ ] eslint
 - [ ] Pass params from router
+- [ ] image example
