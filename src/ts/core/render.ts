@@ -15,10 +15,16 @@ export interface PlainNode<T> {
 
 export function renderInto<T> (query: string, plainNode: Omit<PlainNode<T>, 'element' | 'update'>): void {
   const parentElement = document.querySelector(query)
-  if (parentElement === null) { console.error('[render] No element found for ' + query); return }
+  if (parentElement === null) {
+    console.error('[render] No element found for ' + query)
+    return
+  }
   parentElement.innerHTML = ''
   const element = render(plainNode)
-  if (typeof element === 'undefined') { console.error('[render] Could not render plainNode: ', plainNode); return }
+  if (typeof element === 'undefined') {
+    console.error('[render] Could not render plainNode: ', plainNode)
+    return
+  }
   parentElement.append(element)
 }
 
