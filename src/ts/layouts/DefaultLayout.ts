@@ -9,7 +9,7 @@ export default {
       children: [{
         tag: 'h1',
         text: 'Something'
-      }, Link('Start', '/'), Link('Login', '/login')]
+      }, Link('Start', '/'), Link('Login', '/login'), Link('User', '/users/12345')]
     }]
   }, {
     id: 'page'

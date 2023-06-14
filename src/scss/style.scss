@@ -60,6 +60,11 @@ header nav {
   flex-direction: row;
 }
 
+header nav a {
+  line-height: 36px;
+  padding: 0 0 0 2rem;
+}
+
 h1 {
   margin: 0;
 }

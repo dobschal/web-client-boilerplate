@@ -7,10 +7,12 @@ export interface PlainNode<T> {
   element: HTMLElement
   update: (this: ThisParameterType<PlainNode<T>>) => HTMLElement | undefined
   onCreate?: (element: HTMLElement) => void
-  condition?: (data: unknown | undefined) => boolean
+  condition?: (data: T) => boolean
   text?: string
-  children?: Array<PlainNode<T>>
+  children?: Array< Omit<PlainNode<T>, 'element' | 'update'>>
   loop?: [string, PlainNode<T>]
+  placeholder?: string
+  id?: string
 }
 
 export function renderInto<T> (query: string, plainNode: Omit<PlainNode<T>, 'element' | 'update'>): void {
@@ -52,7 +54,7 @@ export function render <T> (plainNodeParam: Omit<PlainNode<T>, 'element' | 'upda
         }
         break
       case 'condition':
-        if (!plainNode.condition!(plainNode.data)) return
+        if (!plainNode.condition!(plainNode.data!)) return
         break
       case 'text':
         plainNode.element.innerHTML = _parseString(plainNode.text, plainNode.data)
@@ -84,7 +86,7 @@ export function render <T> (plainNodeParam: Omit<PlainNode<T>, 'element' | 'upda
 
 function _renderChildren<T> (plainNode: PlainNode<T>): void {
   for (let i = 0; i < plainNode.children!.length; i++) {
-    const childPlainNode = plainNode.children![i]
+    const childPlainNode = plainNode.children![i] as PlainNode<T>
     if (typeof childPlainNode.data === 'undefined') {
       childPlainNode.data = plainNode.data
     }
@@ -115,7 +117,7 @@ function _renderChildren<T> (plainNode: PlainNode<T>): void {
   // Remove nodes from DOM that aren't in the PlainNode anymore.
   for (let i = 0; i < plainNode.element.children.length; i++) {
     const childElement = plainNode.element.children[i]
-    if (plainNode.children!.find(childPlainNode => childPlainNode.element === childElement) == null) {
+    if (plainNode.children!.find(childPlainNode => (childPlainNode as PlainNode<any>).element === childElement) == null) {
       childElement.parentNode?.removeChild(childElement)
     }
   }

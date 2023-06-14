@@ -12,7 +12,6 @@ export default {
   class: 'page',
   text: 'User {{ userId }}!',
   onCreate (this: PlainNode<UserPageData>) {
-    console.log('Page got created...', currentRoute()?.data?.userId, this)
     this.data!.userId = currentRoute()?.data?.userId ?? ''
     this.update()
   }

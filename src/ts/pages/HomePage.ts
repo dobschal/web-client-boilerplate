@@ -1,4 +1,11 @@
+import logo from '../../assets/typescript.svg'
+
 export default {
   class: 'page',
-  text: 'Hello World'
+  children: [
+    {
+      tag: 'img',
+      src: logo
+    }
+  ]
 }
